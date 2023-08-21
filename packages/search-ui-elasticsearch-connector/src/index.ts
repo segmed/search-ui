@@ -9,7 +9,7 @@ import type {
 
 import handleSearchRequest from "./handlers/search";
 import handleAutocompleteRequest from "./handlers/autocomplete";
-import { CloudHost, PostProcessRequestBodyFn } from "./types";
+import { CloudHost, PostProcessRequestBodyFn, Transporter } from "./types";
 
 type ConnectionOptions = {
   host?: string;
@@ -21,15 +21,32 @@ type ConnectionOptions = {
   };
 };
 
+function isTransporter(
+  config: ConnectionOptions | Transporter
+): config is Transporter {
+  return (config as Transporter).performRequest !== undefined;
+}
+
 export * from "./types";
 
+export { ElasticsearchTransporter } from "./handlers/transporter";
+
+export { SearchResponse as Response } from "./handlers/search/Response";
+export { SearchRequest as Request } from "./handlers/search/Request";
+
 class ElasticsearchAPIConnector implements APIConnector {
+  private transporter: Transporter;
+
   constructor(
-    private config: ConnectionOptions,
+    private config: ConnectionOptions | Transporter,
     private postProcessRequestBodyFn?: PostProcessRequestBodyFn
   ) {
-    if (!config.host && !config.cloud) {
-      throw new Error("Either host or cloud configuration must be provided");
+    if (isTransporter(config)) {
+      this.transporter = config;
+    } else {
+      if (!config.host && !config.cloud) {
+        throw new Error("Either host or cloud configuration must be provided");
+      }
     }
   }
 
@@ -43,6 +60,7 @@ class ElasticsearchAPIConnector implements APIConnector {
     state: RequestState,
     queryConfig: QueryConfig
   ): Promise<ResponseState> {
+    this.config = this.config as ConnectionOptions;
     return handleSearchRequest({
       state,
       queryConfig,
@@ -53,7 +71,8 @@ class ElasticsearchAPIConnector implements APIConnector {
         apiKey: this.config.apiKey,
         headers: this.config.connectionOptions?.headers
       },
-      postProcessRequestBodyFn: this.postProcessRequestBodyFn
+      postProcessRequestBodyFn: this.postProcessRequestBodyFn,
+      transporter: this.transporter
     });
   }
 
@@ -61,6 +80,7 @@ class ElasticsearchAPIConnector implements APIConnector {
     state: RequestState,
     queryConfig: AutocompleteQueryConfig
   ): Promise<AutocompleteResponseState> {
+    this.config = this.config as ConnectionOptions;
     return handleAutocompleteRequest({
       state,
       queryConfig,

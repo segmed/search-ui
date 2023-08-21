@@ -2,7 +2,7 @@ import type { ResponseState } from "@elastic/search-ui";
 import { SearchkitResponse } from "@searchkit/sdk";
 import { fieldResponseMapper } from "../common";
 
-function SearchResponse(results: SearchkitResponse): ResponseState {
+export function SearchResponse(results: SearchkitResponse): ResponseState {
   const facets = (results.facets || []).reduce((acc, facet) => {
     return {
       ...acc,
@@ -33,7 +33,7 @@ function SearchResponse(results: SearchkitResponse): ResponseState {
     facets,
     results: results.hits.items.map(fieldResponseMapper),
     requestId: null,
-    rawResponse: null
+    rawResponse: results
   };
   return response;
 }

@@ -40,7 +40,7 @@ export function getFilters(
   }, []);
 }
 
-function SearchRequest(
+export function SearchRequest(
   state: RequestState,
   queryConfig: QueryConfig
 ): SearchkitVariables {

@@ -1701,6 +1701,15 @@
     uuid "^8.3.0"
     vfile "^4.2.0"
 
+"@elastic/search-ui-elasticsearch-connector@1.20.2":
+  version "1.20.2"
+  resolved "https://registry.yarnpkg.com/@elastic/search-ui-elasticsearch-connector/-/search-ui-elasticsearch-connector-1.20.2.tgz#751e466ccbf2f3281caed8105efa13656eb58fbc"
+  integrity sha512-DJKMJs7sdip8WYyIPvWhDy20go1LvWkdDH3HR1GpbUno3fM6XfWiyKAM1ZUjVROxb4Ocrycr0WJvsRYO54Qk8w==
+  dependencies:
+    "@elastic/elasticsearch" "^8.2.1"
+    "@elastic/search-ui" "1.20.2"
+    "@searchkit/sdk" "^3.0.0"
+
 "@elastic/transport@^8.2.0":
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/@elastic/transport/-/transport-8.2.0.tgz#f292cb79c918a36268dd853431e41f13544814ad"

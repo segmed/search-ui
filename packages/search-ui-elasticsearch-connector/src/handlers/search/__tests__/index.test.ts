@@ -3,6 +3,7 @@ import Searchkit, { SearchkitConfig, SearchkitResponse } from "@searchkit/sdk";
 import type { SearchkitRequest } from "@searchkit/sdk";
 import type { SearchRequest } from "../../../types";
 import handleRequest from "../index";
+import { ElasticsearchTransporter } from "../../transporter";
 
 const mockSearchkitResponse: SearchkitResponse = {
   summary: {
@@ -132,7 +133,11 @@ describe("Search results", () => {
       postProcessRequestBodyFn,
       connectionOptions: {
         apiKey: "test"
-      }
+      },
+      transporter: new ElasticsearchTransporter(
+        "http://localhost:9200",
+        "engineName"
+      )
     });
 
     expect(postProcessRequestBodyFn).toHaveBeenCalled();
@@ -225,7 +230,11 @@ describe("Search results", () => {
       index: "test",
       connectionOptions: {
         apiKey: "test"
-      }
+      },
+      transporter: new ElasticsearchTransporter(
+        "http://localhost:9200",
+        "engineName"
+      )
     });
 
     const searchkitRequestInstance = searchkitMock.mock.results[0].value;

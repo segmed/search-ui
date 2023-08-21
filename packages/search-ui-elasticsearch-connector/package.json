@@ -1,5 +1,5 @@
 {
-  "name": "@elastic/search-ui-elasticsearch-connector",
+  "name": "@segmed/search-ui-elasticsearch-connector",
   "version": "1.20.2",
   "description": "A Search UI connector for Elasticsearch",
   "homepage": "https://docs.elastic.co/search-ui",
@@ -9,15 +9,14 @@
   "types": "lib/esm/index.d.ts",
   "sideEffects": false,
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "lib": "lib"
   },
   "files": [
     "lib"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elastic/search-ui.git",
+    "url": "git+https://github.com/segmed/search-ui.git",
     "directory": "packages/search-ui-elasticsearch-connector"
   },
   "scripts": {
@@ -32,7 +31,7 @@
     "prepare": "npm run build"
   },
   "bugs": {
-    "url": "https://github.com/elastic/search-ui/issues"
+    "url": "https://github.com/segmed/search-ui/issues"
   },
   "devDependencies": {
     "rimraf": "^2.6.3",
@@ -42,5 +41,6 @@
     "@elastic/elasticsearch": "^8.2.1",
     "@elastic/search-ui": "1.20.2",
     "@searchkit/sdk": "^3.0.0"
-  }
+  },
+  "author": "justin@segmed.ai"
 }

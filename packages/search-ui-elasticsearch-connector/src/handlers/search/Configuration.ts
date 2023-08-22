@@ -73,6 +73,13 @@ export function buildBaseFilters(baseFilters: Filter[]): BaseFilters {
       any: "should",
       none: "must_not"
     }[filter.type];
+    const boolProps = {
+      all: {},
+      any: {
+        minimum_should_match: 1
+      },
+      none: {}
+    }[filter.type];
     return [
       ...acc,
       {
@@ -105,11 +112,15 @@ export function buildBaseFilters(baseFilters: Filter[]): BaseFilters {
                 [filter.field]: value
               }
             };
-          })
+          }),
+          ...boolProps
         }
       }
     ];
   }, []);
+
+  // eslint-disable-next-line no-console
+  console.log("buildBaseFilters", { filters, baseFilters });
 
   return filters;
 }

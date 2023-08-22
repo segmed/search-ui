@@ -119,9 +119,6 @@ export function buildBaseFilters(baseFilters: Filter[]): BaseFilters {
     ];
   }, []);
 
-  // eslint-disable-next-line no-console
-  console.log("buildBaseFilters", { filters, baseFilters });
-
   return filters;
 }
 

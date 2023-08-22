@@ -1,6 +1,6 @@
 {
   "name": "@segmed/search-ui-elasticsearch-connector",
-  "version": "1.20.2-segmed-0",
+  "version": "1.20.2-segmed-1",
   "description": "A Search UI connector for Elasticsearch",
   "homepage": "https://docs.elastic.co/search-ui",
   "license": "Apache-2.0",

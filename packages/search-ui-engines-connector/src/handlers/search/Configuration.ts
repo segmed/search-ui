@@ -4,8 +4,7 @@ import type {
   FilterValue,
   FilterValueRange,
   QueryConfig,
-  RequestState,
-  SearchFieldConfiguration
+  RequestState
 } from "@elastic/search-ui";
 import {
   BaseFilter,
